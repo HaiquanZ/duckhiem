@@ -28,7 +28,7 @@ export default function Navigation() {
             <div className="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center">
               <Camera className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-xl text-gray-800">Portfolio</span>
+            <span className="font-bold text-xl text-gray-800">DucKhiem</span>
           </Link>
 
           {/* Desktop Navigation */}

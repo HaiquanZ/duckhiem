@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Camera, Mail, Instagram, Twitter, Github } from "lucide-react"
+import Link from "next/link";
+import { Camera, Mail, Instagram, Twitter, Github, Facebook } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,24 +8,41 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 font-bold text-xl mb-4">
+            <Link
+              href="/"
+              className="flex items-center gap-2 font-bold text-xl mb-4"
+            >
               <Camera className="w-6 h-6 text-blue-400" />
-              <span>Portfolio</span>
+              <span>DucKhiem</span>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
-              Capturing life's beautiful moments through photography and sharing stories from around the world.
+              This website is my personal website. It is made by me. I want to
+              keep and share my memories here. There will be times when I want
+              to look back my journey. Thanks for visiting!
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="https://www.instagram.com/_hqz.khim_/"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="w-5 h-5" />
+              <Link
+                href="https://fb.com/hqz.khim"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <Facebook className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="https://github.com/HaiquanZ"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Github className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Mail className="w-5 h-5" />
               </Link>
             </div>
@@ -36,22 +53,34 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/photography" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/photography"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Photography
                 </Link>
               </li>
               <li>
-                <Link href="/memory" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/memory"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Memory
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   About
                 </Link>
               </li>
@@ -62,17 +91,16 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>San Francisco, CA</li>
-              <li>hello@portfolio.com</li>
-              <li>+1 (555) 123-4567</li>
+              <li>Ha Noi, Viet Nam</li>
+              <li>nn764562@gmail.com</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Portfolio. All rights reserved.</p>
+          <p>&copy; 2024 DucKhiem. All rights reserved.</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

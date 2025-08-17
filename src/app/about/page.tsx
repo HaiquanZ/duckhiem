@@ -1,29 +1,24 @@
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
-import { Badge } from "../../components/ui/badge"
-import { Button } from "../../components/ui/button"
-import { Camera, Mail, MapPin, Heart, Plane } from "lucide-react"
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { Badge } from "../../components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Camera, Mail, MapPin, Heart, Banknote } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutPage() {
   const skills = [
-    "Portrait Photography",
-    "Landscape Photography",
-    "Street Photography",
-    "Photo Editing",
-    "Lightroom",
-    "Photoshop",
+    "Cooking",
+    "Photography",
+    "Sleeping",
     "Travel Planning",
     "Storytelling",
-  ]
-
-  const equipment = [
-    { name: "Canon EOS R5", type: "Camera Body" },
-    { name: "Canon RF 24-70mm f/2.8L", type: "Lens" },
-    { name: "Canon RF 70-200mm f/2.8L", type: "Lens" },
-    { name: "Canon RF 16-35mm f/2.8L", type: "Lens" },
-    { name: "DJI Mini 3 Pro", type: "Drone" },
-    { name: "Peak Design Tripod", type: "Accessory" },
-  ]
+    "Coding",
+  ];
 
   return (
     <div className="min-h-screen py-8 px-4">
@@ -32,7 +27,7 @@ export default function AboutPage() {
         <div className="text-center mb-12">
           <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden">
             <Image
-              src="/placeholder.svg?height=160&width=160"
+              src="https://avatars.githubusercontent.com/u/97653810?v=4"
               alt="Profile"
               width={160}
               height={160}
@@ -41,7 +36,7 @@ export default function AboutPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">About Me</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Passionate photographer and travel enthusiast capturing life's beautiful moments
+            I'm just an ordinary person and bla...bla...
           </p>
         </div>
 
@@ -55,19 +50,10 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              Hello! I'm a passionate photographer who believes that every moment has a story worth telling. My journey
-              with photography began over 8 years ago when I picked up my first camera during a college trip to the
-              mountains.
-            </p>
-            <p>
-              What started as a hobby quickly became my greatest passion. I love capturing the raw beauty of landscapes,
-              the authentic emotions in portraits, and the vibrant energy of street life. Through my lens, I aim to
-              freeze moments that might otherwise be forgotten.
-            </p>
-            <p>
-              When I'm not behind the camera, you'll find me planning my next adventure, editing photos, or sharing
-              stories from my travels. I believe that photography is not just about taking pictures—it's about
-              connecting with people, places, and experiences that shape who we are.
+              In this part, I want to tell the story of my life and my
+              achievements. But because I have not achieved anything and have
+              not contributed anything to society, I do not know what to write.
+              I will add it later.
             </p>
           </CardContent>
         </Card>
@@ -83,20 +69,18 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">Based in:</span>
-                <span className="font-medium">San Francisco, CA</span>
+                <span className="text-gray-600">Name:</span>
+                <span className="font-medium">Do Duc Khiem</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Experience:</span>
-                <span className="font-medium">8+ Years</span>
+                <span className="text-gray-600">Personal email:</span>
+                <span className="font-medium">nn764562@gmail</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Favorite Genre:</span>
-                <span className="font-medium">Landscape</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Countries Visited:</span>
-                <span className="font-medium">15+</span>
+                <span className="text-gray-600">Description:</span>
+                <span className="font-medium">
+                  Khiêm ngoan ngoãn, hiền lành :V
+                </span>
               </div>
             </CardContent>
           </Card>
@@ -104,26 +88,22 @@ export default function AboutPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Plane className="w-5 h-5 text-green-500" />
-                Next Adventure
+                <Banknote className="w-5 h-5 text-green-500" />
+                Donate me if u want
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">Destination:</span>
-                <span className="font-medium">New Zealand</span>
+                <span className="text-gray-600">Bank:</span>
+                <span className="font-medium">Vietcombank</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">When:</span>
-                <span className="font-medium">Spring 2024</span>
+                <span className="text-gray-600">Account number:</span>
+                <span className="font-medium">1014943459</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Focus:</span>
-                <span className="font-medium">Landscapes</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Duration:</span>
-                <span className="font-medium">3 Weeks</span>
+                <span className="text-gray-600">Owner:</span>
+                <span className="font-medium">Do Duc Khiem</span>
               </div>
             </CardContent>
           </Card>
@@ -148,46 +128,27 @@ export default function AboutPage() {
           </CardContent>
         </Card>
 
-        {/* Equipment */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Photography Equipment</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {equipment.map((item, index) => (
-                <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                  <span className="font-medium">{item.name}</span>
-                  <Badge variant="outline">{item.type}</Badge>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Contact */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Mail className="w-5 h-5 text-blue-500" />
-              Let's Connect
+              Talk with me. Don't be shy
             </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 mb-6">
-              I'd love to hear from you! Whether you're interested in collaborating, have questions about photography,
-              or just want to chat about travel, feel free to reach out.
+              Let's Connect! I look forward to hearing from you! If you are
+              interested or would like to chat with me, feel free to reach out.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                Send Email
+              <Button variant="outline">
+                <Link href="https://m.me/hqz.khim">Say "hi"</Link>
               </Button>
-              <Button variant="outline">View Resume</Button>
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }
