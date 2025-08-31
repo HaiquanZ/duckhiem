@@ -1,12 +1,32 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "../../components/ui/button"
-import { Badge } from "../../components/ui/badge"
-import { Card, CardContent } from "../../components/ui/card"
-import { Calendar, MapPin, ArrowRight } from "lucide-react"
-import { trips } from "@/lib/data"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
+import { Card, CardContent } from "../../components/ui/card";
+import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import { trips } from "@/lib/data";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Memory } from "@/lib/models/memory";
+import { getData } from "@/lib/services/firestore";
 
 export default function MemoryPage() {
+  const [memories, SetMemories] = useState<Memory[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Lấy data khi load component
+  useEffect(() => {
+    async function fetchMemories() {
+      setLoading(true);
+      const data = await getData<Memory>("memories");
+      console.log(data);
+      SetMemories(data);
+      setLoading(false);
+    }
+    fetchMemories();
+  }, []);
+  const router = useRouter();
   return (
     <div className="min-h-screen">
       {/* Hero Header */}
@@ -14,8 +34,12 @@ export default function MemoryPage() {
         <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center px-4">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Memories</h1>
-            <p className="text-lg text-blue-100 max-w-2xl">Adventures and journeys that shaped my perspective</p>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+              Memories
+            </h1>
+            <p className="text-lg text-blue-100 max-w-2xl">
+              Adventures and journeys that shaped my perspective
+            </p>
           </div>
         </div>
       </div>
@@ -33,7 +57,9 @@ export default function MemoryPage() {
               <div className="text-gray-600">Cities Explored</div>
             </div>
             <div className="p-6 bg-green-50 rounded-xl">
-              <div className="text-3xl font-bold text-green-600 mb-2">1000+</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">
+                1000+
+              </div>
               <div className="text-gray-600">Photos Taken</div>
             </div>
             <div className="p-6 bg-orange-50 rounded-xl">
@@ -49,21 +75,32 @@ export default function MemoryPage() {
         <h2 className="text-3xl font-bold mb-8">Recent Adventures</h2>
 
         <div className="space-y-12">
-          {trips.map((trip) => (
-            <Card key={trip.id} className="overflow-hidden border-0 shadow-lg rounded-2xl">
+          {memories.map((trip) => (
+            <Card
+              key={trip.id}
+              className="overflow-hidden border-0 shadow-lg rounded-2xl"
+              onClick={() => {
+                router.push(`/memory/${trip.id}`);
+              }}
+            >
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Cover Image */}
                 <div className="relative h-64 md:h-auto">
-                  <Image src={trip.coverImage || "/placeholder.svg"} alt={trip.title} fill className="object-cover" />
+                  <Image
+                    src={trip.thumbnail || "/placeholder.svg"}
+                    alt={trip.name}
+                    fill
+                    className="object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent md:bg-gradient-to-t" />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-blue-600">{trip.duration}</Badge>
+                    <Badge className="bg-blue-600">{trip.date}</Badge>
                   </div>
                 </div>
 
                 {/* Content */}
                 <CardContent className="p-6 md:p-8">
-                  <h3 className="text-2xl font-bold mb-2">{trip.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2">{trip.name}</h3>
 
                   <div className="flex flex-wrap gap-4 text-gray-600 mb-4">
                     <div className="flex items-center gap-1">
@@ -76,13 +113,21 @@ export default function MemoryPage() {
                     </div>
                   </div>
 
-                  <p className="text-gray-700 mb-6 line-clamp-3">{trip.description}</p>
+                  <p className="text-gray-700 mb-6 line-clamp-3">
+                    {trip.description}
+                  </p>
 
                   <div className="mb-6">
-                    <h4 className="font-semibold mb-2 text-sm text-gray-500">HIGHLIGHTS</h4>
+                    <h4 className="font-semibold mb-2 text-sm text-gray-500">
+                      HIGHLIGHTS
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {trip.highlights.map((highlight, index) => (
-                        <Badge key={index} variant="outline" className="bg-gray-50">
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          className="bg-gray-50"
+                        >
                           {highlight}
                         </Badge>
                       ))}
@@ -91,7 +136,11 @@ export default function MemoryPage() {
 
                   <div className="flex justify-end">
                     <Button asChild>
-                      <Link href={`/memory/${trip.id}`} className="flex items-center gap-2">
+                      <Link
+                        href={`/memory/${trip.id}`}
+                        className="flex items-center gap-2"
+                        style={{ color: "var(--foreground)" }}
+                      >
                         View Journey
                         <ArrowRight className="h-4 w-4" />
                       </Link>
@@ -104,5 +153,5 @@ export default function MemoryPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
