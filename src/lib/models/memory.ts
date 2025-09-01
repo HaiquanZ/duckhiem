@@ -6,4 +6,5 @@ export interface Memory {
   location: string;
   date: string;
   highlights: string[];
+  duration: string;
 }

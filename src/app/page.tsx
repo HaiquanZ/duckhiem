@@ -8,16 +8,6 @@ import { addData } from "@/lib/services/firestore";
 import { Memory } from "@/lib/models/memory";
 
 export default function HomePage() {
-   async function handleAdd() {
-    const id = await addData<Omit<Memory, "id">>("memories", {
-      name: "Pet",
-      thumbnail: "https://images.theconversation.com/files/651621/original/file-20250226-32-jxjhmy.jpg?ixlib=rb-4.1.0&rect=0%2C0%2C5991%2C3997&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip",
-      description: "With a wagging tail and a gentle purr, these two companions bring double the joy into every day. The dog, full of playful energy and loyalty, is always ready for adventure, while the cat balances things out with elegance, curiosity, and a touch of mischief. Together, they create the perfect harmony — one offering boundless excitement, the other graceful charm — and both showering their humans with unconditional love - form Chat GPT",
-      location: "My home",
-      date: "Continuously updated",
-      highlights: ["pets", "cats", "dogs", "cute", "animal"]
-    });
-  }
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -66,7 +56,7 @@ export default function HomePage() {
       {/* Quick Navigation */}
       <section className="py-16 px-4 bg-gray-50" id="explore-section">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800" onClick={handleAdd}>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
             Explore
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
