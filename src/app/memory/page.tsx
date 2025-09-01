@@ -1,11 +1,9 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import { Card, CardContent } from "../../components/ui/card";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import { trips } from "@/lib/data";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Memory } from "@/lib/models/memory";
@@ -94,9 +92,9 @@ export default function MemoryPage() {
               key={trip.id}
               className="overflow-hidden border-0 shadow-lg rounded-2xl"
               onClick={() => {
-                router.push(`/memory/${trip.id}`);
+                router.push(trip.link);
               }}
-              style={{ cursor: 'pointer'}}
+              style={{ cursor: "pointer" }}
             >
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Cover Image */}
@@ -150,15 +148,9 @@ export default function MemoryPage() {
                   </div>
 
                   <div className="flex justify-end">
-                    <Button asChild>
-                      <Link
-                        href={`/memory/${trip.id}`}
-                        className="flex items-center gap-2"
-                        style={{ color: "var(--foreground)" }}
-                      >
-                        View Journey
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
+                    <Button>
+                      View Journey
+                      <ArrowRight className="h-4 w-4" />
                     </Button>
                   </div>
                 </CardContent>

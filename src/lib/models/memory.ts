@@ -7,4 +7,5 @@ export interface Memory {
   date: string;
   highlights: string[];
   duration: string;
+  link: string;
 }
