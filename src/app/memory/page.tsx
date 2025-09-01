@@ -15,17 +15,31 @@ export default function MemoryPage() {
   const [memories, SetMemories] = useState<Memory[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Lấy data khi load component
   useEffect(() => {
     async function fetchMemories() {
       setLoading(true);
       const data = await getData<Memory>("memories");
-      console.log(data);
-      SetMemories(data);
+
+      const sortedData = [...data].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        const isValidA = !isNaN(dateA.getTime());
+        const isValidB = !isNaN(dateB.getTime());
+
+        if (!isValidA && !isValidB) return 0; // cả 2 đều invalid → giữ nguyên
+        if (!isValidA) return -1; // a invalid → lên đầu
+        if (!isValidB) return 1; // b invalid → lên đầu
+
+        return dateB.getTime() - dateA.getTime();
+      });
+
+      SetMemories(sortedData);
       setLoading(false);
     }
     fetchMemories();
   }, []);
+
   const router = useRouter();
   return (
     <div className="min-h-screen">
@@ -49,11 +63,11 @@ export default function MemoryPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="p-6 bg-blue-50 rounded-xl">
-              <div className="text-3xl font-bold text-blue-600 mb-2">15+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">2+</div>
               <div className="text-gray-600">Countries Visited</div>
             </div>
             <div className="p-6 bg-blue-50 rounded-xl">
-              <div className="text-3xl font-bold text-blue-600 mb-2">50+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
               <div className="text-gray-600">Cities Explored</div>
             </div>
             <div className="p-6 bg-green-50 rounded-xl">
@@ -82,6 +96,7 @@ export default function MemoryPage() {
               onClick={() => {
                 router.push(`/memory/${trip.id}`);
               }}
+              style={{ cursor: 'pointer'}}
             >
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Cover Image */}
@@ -94,7 +109,7 @@ export default function MemoryPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent md:bg-gradient-to-t" />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-blue-600">{trip.date}</Badge>
+                    <Badge className="bg-blue-600">{trip.duration}</Badge>
                   </div>
                 </div>
 
