@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Card, CardContent } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { Camera, Filter, Images } from "lucide-react";
-import { photos } from "@/lib/data";
 import { useEffect, useState } from "react";
 import { Photography } from "@/lib/models/photography";
 import { getData } from "@/lib/services/firestore";
