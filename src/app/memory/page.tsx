@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Memory } from "@/lib/models/memory";
 import { getData } from "@/lib/services/firestore";
+import { MEMORY_PAGE } from "@/lib/constants/target";
+import { collectVisitorInfo } from "@/lib/services/visitor";
 
 export default function MemoryPage() {
   const [memories, SetMemories] = useState<Memory[]>([]);
@@ -36,6 +38,7 @@ export default function MemoryPage() {
       setLoading(false);
     }
     fetchMemories();
+    collectVisitorInfo(MEMORY_PAGE);
   }, []);
 
   const router = useRouter();

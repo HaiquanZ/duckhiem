@@ -7,6 +7,8 @@ import { Camera, Filter, Images } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Photography } from "@/lib/models/photography";
 import { getData } from "@/lib/services/firestore";
+import { collectVisitorInfo } from "@/lib/services/visitor";
+import { PHOTOGRAPHY_PAGE } from "@/lib/constants/target";
 
 export default function PhotographyPage() {
   const [photos, setPhotos] = useState<Photography[]>([]);
@@ -35,6 +37,7 @@ export default function PhotographyPage() {
       setLoading(false);
     }
     fetchMemories();
+    collectVisitorInfo(PHOTOGRAPHY_PAGE);
   }, []);
   return (
     <div className="min-h-screen bg-gray-50">

@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
 import { Camera, Mail, Instagram, Twitter, Github, Facebook } from "lucide-react";
+import { collectVisitorInfo } from "@/lib/services/visitor";
+import { EMAIL, FACEBOOK, GITHUB, INSTAGRAM } from "@/lib/constants/target";
 
 export default function Footer() {
   return (
@@ -24,24 +27,28 @@ export default function Footer() {
               <Link
                 href="https://www.instagram.com/_hqz.khim_/"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() => collectVisitorInfo(INSTAGRAM)}
               >
                 <Instagram className="w-5 h-5" />
               </Link>
               <Link
                 href="https://fb.com/hqz.khim"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() => collectVisitorInfo(FACEBOOK)}
               >
                 <Facebook className="w-5 h-5" />
               </Link>
               <Link
                 href="https://github.com/HaiquanZ"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() => collectVisitorInfo(GITHUB)}
               >
                 <Github className="w-5 h-5" />
               </Link>
               <Link
                 href="#"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() => collectVisitorInfo(EMAIL)}
               >
                 <Mail className="w-5 h-5" />
               </Link>

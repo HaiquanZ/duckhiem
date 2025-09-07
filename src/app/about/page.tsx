@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import {
   Card,
@@ -9,16 +10,17 @@ import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Camera, Mail, MapPin, Heart, Banknote } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { collectVisitorInfo } from "@/lib/services/visitor";
+import { ABOUT_PAGE, SAY_HI } from "@/lib/constants/target";
+import { SKILLS } from "@/lib/constants/skills";
 
 export default function AboutPage() {
-  const skills = [
-    "Cooking",
-    "Photography",
-    "Sleeping",
-    "Travel Planning",
-    "Storytelling",
-    "Coding",
-  ];
+  
+
+  useEffect(() => {
+    collectVisitorInfo(ABOUT_PAGE);
+  }, []);
 
   return (
     <div className="min-h-screen py-8 px-4">
@@ -119,7 +121,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-wrap gap-2">
-              {skills.map((skill, index) => (
+              {SKILLS.map((skill, index) => (
                 <Badge key={index} variant="secondary" className="text-sm">
                   {skill}
                 </Badge>
@@ -142,7 +144,7 @@ export default function AboutPage() {
               interested or would like to chat with me, feel free to reach out.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="outline">
+              <Button variant="outline" onClick={() => collectVisitorInfo(SAY_HI)}>
                 <Link href="https://m.me/hqz.khim">Say "hi"</Link>
               </Button>
             </div>
