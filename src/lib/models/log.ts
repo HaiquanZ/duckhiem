@@ -10,4 +10,5 @@ export interface Log {
     referrer: string;
     ip: string;
     target: string;
+    userId: string;
 }
