@@ -1,13 +1,24 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Camera, MapPin, User } from "lucide-react";
-import { addData } from "@/lib/services/firestore";
-import { Memory } from "@/lib/models/memory";
+import { useEffect } from "react";
+import { collectVisitorInfo } from "@/lib/services/visitor";
+import {
+  HOME_ABOUT,
+  HOME_EXPLORE,
+  HOME_EXPLORE_ABOUT,
+  HOME_EXPLORE_MEMORY,
+  HOME_EXPLORE_PHOTO,
+  HOME_PAGE,
+} from "@/lib/constants/target";
 
 export default function HomePage() {
+  useEffect(() => {
+    collectVisitorInfo(HOME_PAGE);
+  }, []);
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -29,15 +40,16 @@ export default function HomePage() {
             Welcome to My World
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-200">
-            This is my personal website. I want to
-            keep and share my memories here. There will be times when I want to
-            look back my journey. Thanks for visiting!
+            This is my personal website. I want to keep and share my memories
+            here. There will be times when I want to look back my journey.
+            Thanks for visiting!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
               size="lg"
               className="bg-white text-gray-900 hover:bg-gray-100 shadow-lg"
+              onClick={() => collectVisitorInfo(HOME_EXPLORE)}
             >
               <Link href="#explore-section">Explore</Link>
             </Button>
@@ -46,6 +58,7 @@ export default function HomePage() {
               size="lg"
               variant="outline"
               className="border-white text-white hover:bg-white hover:text-gray-900 shadow-lg"
+              onClick={() => collectVisitorInfo(HOME_ABOUT)}
             >
               <Link href="/about">About Me</Link>
             </Button>
@@ -62,7 +75,10 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="group hover:shadow-lg transition-all duration-300 border border-gray-200 rounded-lg">
               <Link href="/photography">
-                <CardContent className="p-6 text-center">
+                <CardContent
+                  className="p-6 text-center"
+                  onClick={() => collectVisitorInfo(HOME_EXPLORE_PHOTO)}
+                >
                   <Camera className="w-12 h-12 mx-auto mb-4 text-primary-600" />
                   <h3 className="text-xl font-semibold mb-2 text-gray-800">
                     Photography
@@ -76,7 +92,10 @@ export default function HomePage() {
 
             <Card className="group hover:shadow-lg transition-all duration-300 border border-gray-200 rounded-lg">
               <Link href="/memory">
-                <CardContent className="p-6 text-center">
+                <CardContent
+                  className="p-6 text-center"
+                  onClick={() => collectVisitorInfo(HOME_EXPLORE_MEMORY)}
+                >
                   <MapPin className="w-12 h-12 mx-auto mb-4 text-primary-600" />
                   <h3 className="text-xl font-semibold mb-2 text-gray-800">
                     Memory
@@ -90,7 +109,10 @@ export default function HomePage() {
 
             <Card className="group hover:shadow-lg transition-all duration-300 border border-gray-200 rounded-lg">
               <Link href="/about">
-                <CardContent className="p-6 text-center">
+                <CardContent
+                  className="p-6 text-center"
+                  onClick={() => collectVisitorInfo(HOME_EXPLORE_ABOUT)}
+                >
                   <User className="w-12 h-12 mx-auto mb-4 text-primary-600" />
                   <h3 className="text-xl font-semibold mb-2 text-gray-800">
                     About
@@ -120,8 +142,13 @@ export default function HomePage() {
                 Explore my recent work capturing the beauty of everyday moments
                 and extraordinary landscapes.
               </p>
-              <Button asChild className="bg-white text-gray-900 hover:bg-gray-100 shadow-md">
-                <Link href="/photography" color="black">View Gallery</Link>
+              <Button
+                asChild
+                className="bg-white text-gray-900 hover:bg-gray-100 shadow-md"
+              >
+                <Link href="/photography" color="black">
+                  View Gallery
+                </Link>
               </Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
